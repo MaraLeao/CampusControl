@@ -5,7 +5,9 @@
 @section('content')
     <h2>Lista de Estudantes</h2>
 
-    <button> Adicionar novo aluno </button>
+    <a href="{{ route('students.create') }}" class="btn btn-primary">
+        Novo Aluno
+    </a>
 
     <table>
         <tr>

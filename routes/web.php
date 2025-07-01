@@ -15,6 +15,6 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', [StudentController::class, 'index']);
-Route::get('/students/create', [StudentController::class, 'create']);
+Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
 
 
