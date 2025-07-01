@@ -22,7 +22,7 @@
                         <div class="col-md-6">
                             <h5 class="mb-3 text-secondary">Informações Pessoais</h5>
                             <p><strong>Nome:</strong> {{ $student->nome }}</p>
-                            <p><strong>CPF:</strong> {{ substr_replace(substr_replace($student->cpf, '.', 3, 0), '.', 7, 0) }}</p>
+                            <p><strong>CPF:</strong> {{ preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $student->cpf) }}</p>
                             <p><strong>RGM:</strong> {{ $student->rgm }}</p>
                             <p><strong>Idade:</strong> {{ $student->idade }} anos</p>
                             <p><strong>Gênero:</strong> 
@@ -73,29 +73,29 @@
                         <i class="fas fa-arrow-left me-2"></i>Voltar
                     </a>
                     
-                    <div>
-                        <a href="/students/{{ $student->id }}/edit" class="btn btn-primary me-2">
-                            <i class="fas fa-edit me-1"></i>Editar
+                    <div class="d-flex gap-2 align-items-center">
+                        <a href="/students/{{ $student->id }}/edit" 
+                        class="btn btn-primary btn-sm d-flex align-items-center">
+                        <i class="fas fa-edit me-1"></i> Editar
                         </a>
-                        
-                        @if($student->ativo)
-                            <form action="/students/{{ $student->id }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-warning" 
-                                        onclick="return confirm('Tem certeza que deseja desativar este aluno?')">
-                                    <i class="fas fa-ban me-1"></i>Desativar
+
+                        <form action="/students/{{ $student->id }}/activate" method="POST" 
+                            onsubmit="return confirm('Tem certeza que deseja {{ $student->ativo ? 'inativar' : 'ativar' }} este aluno?')" 
+                            style="display: inline;">
+                            @csrf
+                            @if($student->ativo)
+                                <button type="submit" class="btn btn-warning btn-sm d-flex align-items-center">
+                                    <i class="fas fa-ban me-1"></i> Desativar
                                 </button>
-                            </form>
-                        @else
-                            <form action="/students/{{ $student->id }}/activate" method="POST" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fas fa-check me-1"></i>Reativar
+                            @else
+                                <button type="submit" class="btn btn-success btn-sm d-flex align-items-center">
+                                    <i class="fas fa-check me-1"></i> Ativar
                                 </button>
-                            </form>
-                        @endif
-                    </div>
+                            @endif
+                        </form>
+</div>
+
+
                 </div>
             </div>
         </div>
