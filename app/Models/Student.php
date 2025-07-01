@@ -9,12 +9,10 @@ class Student extends Model
 {
     use HasFactory;
 
-    protected $table = 'students';
-
     protected $fillable = [
-        'rgm',
-        'cpf',
         'nome',
+        'cpf',
+        'rgm',
         'idade',
         'genero',
         'curso',
@@ -24,17 +22,8 @@ class Student extends Model
     ];
 
     protected $casts = [
-        'rgm' => 'string',
-        'cpf' => 'string',
-        'nome' => 'string',
-        'idade' => 'decimal:0',
-        'genero' => 'string',
-        'curso' => 'string',
-        'campus' => 'string',
         'inicio' => 'date',
         'ativo' => 'boolean',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'idade' => 'integer'
     ];
-    
 }
