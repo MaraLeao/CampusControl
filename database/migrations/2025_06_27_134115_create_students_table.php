@@ -14,16 +14,15 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("rgm");
-            $table->string("cpf");
+            $table->string("rgm")->unique();
+            $table->string("cpf")->unique();
             $table->string("nome");
             $table->decimal("idade");
             $table->char("genero");
             $table->string("curso");
             $table->string("campus");
-            $table->date("inicio");
-            $table->boolean("ativo");
-                      
+            $table->date("inicio")->default(now());
+            $table->boolean("ativo")->default(true);
             });
     }
 
